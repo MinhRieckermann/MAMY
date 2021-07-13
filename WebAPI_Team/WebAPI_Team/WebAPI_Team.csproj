@@ -217,8 +217,12 @@
     <Compile Include="Constants\LogHelper.cs" />
     <Compile Include="Constants\TokenExpireTime.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OddController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\Orders_detailController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\IGenericRepository.cs" />
@@ -234,10 +238,14 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AccountVM.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OddAnalysis.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Orders_detail.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Models\RefreshToken.cs" />
     <Compile Include="Models\STG_SportData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -254,7 +262,11 @@
     <Compile Include="Services\AuthService\AuthService.cs" />
     <Compile Include="Services\BaseService\BaseService.cs" />
     <Compile Include="Services\BaseService\IBaseService.cs" />
+    <Compile Include="Services\CategoryServices\CategoryService.cs" />
     <Compile Include="Services\OddAnalysisService\OddAnalysisService.cs" />
+    <Compile Include="Services\OrderServices\OrderService.cs" />
+    <Compile Include="Services\Orders_detailServices\Orders_detailService.cs" />
+    <Compile Include="Services\ProductServices\ProductService.cs" />
     <Compile Include="Services\SportService\SportService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ChangePasswordBindingModel.cs" />
@@ -262,8 +274,12 @@
     <Compile Include="ViewModels\JsonObject.cs" />
     <Compile Include="ViewModels\JsonRegisterModel.cs" />
     <Compile Include="ViewModels\JsonRegisterOddAnalysis.cs" />
+    <Compile Include="ViewModels\JsonRegisterOrder.cs" />
+    <Compile Include="ViewModels\JsonRegisterOrderDetail.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\QueryOddModel.cs" />
+    <Compile Include="ViewModels\QueryOrderDetailModel.cs" />
+    <Compile Include="ViewModels\QueryOrderModel.cs" />
     <Compile Include="ViewModels\QuerySearchModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -296,6 +312,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -307,7 +324,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -325,6 +344,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Odd\" />
+    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -373,7 +393,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63687</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:63687/</IISUrl>
+          <IISUrl>http://localhost:63688/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

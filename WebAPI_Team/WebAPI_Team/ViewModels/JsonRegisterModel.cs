@@ -20,7 +20,6 @@ namespace WebAPI_Team.ViewModels
         [Display(Name = "Password")]
 
         public string Password { get; set; }
-        public string FullName { get; set; }
-        public string GenderId { get; set; }
+       
     }
 }

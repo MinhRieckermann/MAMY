@@ -16,6 +16,7 @@ namespace WebAPI_Team.DAL
         private GenericRepository<Account> accountRepository;
         private GenericRepository<STG_SportData> stg_SportDataRepository;
         private GenericRepository<OddAnalysis> oddAnalysisRepository;
+
         public GenericRepository<Account> AccountRepository
         {
             get
@@ -52,6 +53,64 @@ namespace WebAPI_Team.DAL
                     this.oddAnalysisRepository = new GenericRepository<OddAnalysis>(context);
                 }
                 return oddAnalysisRepository;
+            }
+        }
+
+
+        private GenericRepository<Product> productRepository;
+        private GenericRepository<Order> orderRepository;
+        private GenericRepository<Orders_detail> orders_detailRepository;
+        private GenericRepository<Category> categoryRepository;
+
+
+        public GenericRepository<Product> ProductRepository
+        {
+            get
+            {
+
+                if (this.productRepository == null)
+                {
+                    this.productRepository = new GenericRepository<Product>(context);
+                }
+                return productRepository;
+            }
+        }
+
+        public GenericRepository<Order> OrderRepository
+        {
+            get
+            {
+
+                if (this.orderRepository == null)
+                {
+                    this.orderRepository = new GenericRepository<Order>(context);
+                }
+                return orderRepository;
+            }
+        }
+
+        public GenericRepository<Orders_detail> Orders_detailRepository
+        {
+            get
+            {
+
+                if (this.orders_detailRepository == null)
+                {
+                    this.orders_detailRepository = new GenericRepository<Orders_detail>(context);
+                }
+                return orders_detailRepository;
+            }
+        }
+        public GenericRepository<Category> CategoryRepository
+        {
+            get
+            {
+
+                if (this.categoryRepository == null)
+                {
+                    this.categoryRepository = new GenericRepository<Category>(context);
+                }
+                return categoryRepository;
             }
         }
         protected virtual void Dispose(bool disposing)

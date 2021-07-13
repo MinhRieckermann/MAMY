@@ -48,7 +48,7 @@ namespace WebAPI_Team.Controllers
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
         }
-
+        // Create User Manager to use in Project 
         public ApplicationUserManager UserManager
         {
             get
@@ -62,7 +62,7 @@ namespace WebAPI_Team.Controllers
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
-        #region Get Method
+        #region collection Get Method to get data from database 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
@@ -77,16 +77,27 @@ namespace WebAPI_Team.Controllers
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
             };
         }
-       
-      
+        [AllowAnonymous]
+        [Route("EmailExist")]
+        [HttpGet]
+        public Boolean CheckEmail (JsonRegisterModel Model)
+        {
+            AccountService accountService = new AccountService(unitOfWork);
+            var result = accountService.CheckExistAccount(Model.Email);
+            if (result == true)
+            {
+                return true;
+            }
+            else return false;
+        }
 
-      
+
 
 
         #endregion
 
-        #region Post Method
-        // POST api/Account/Logout
+        #region collection Post Method to Post data from database  
+        // not use  POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()
         {
@@ -98,7 +109,7 @@ namespace WebAPI_Team.Controllers
 
        
 
-        // POST api/Account/SetPassword
+        // not use POST api/Account/SetPassword
         [Route("SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
         {
@@ -119,7 +130,7 @@ namespace WebAPI_Team.Controllers
 
     
 
-        // POST api/Account/RemoveLogin
+        // not use  POST api/Account/RemoveLogin
         [Route("RemoveLogin")]
         public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
         {
@@ -162,13 +173,26 @@ namespace WebAPI_Team.Controllers
                     var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
 
                     IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
                     AccountService accountService = new AccountService(unitOfWork);
-                    var newacc = accountService.CreateNewAccount(model);
-                    var json = JsonConvert.SerializeObject(newacc);
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, "Success");
-                    response.Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                    return response;
+                    HttpResponseMessage response;
+
+                    if (result.Succeeded==true)
+                    {
+                        var newacc = accountService.CreateNewAccount(model);
+                        var json = JsonConvert.SerializeObject(newacc);
+                        response = Request.CreateResponse(HttpStatusCode.OK, "Success");
+                        response.Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+                        return response;
+
+                    }
+                    else
+                    {
+                        response = Request.CreateResponse(HttpStatusCode.BadRequest, "False");
+                        response.Content = new StringContent("Email Already Exists", System.Text.Encoding.UTF8, "application/json");
+                        return response;
+                    }
+
+                   
                 }
                 else
                 {

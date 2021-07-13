@@ -117,13 +117,13 @@ namespace WebAPI_Team.Repositories
             var newaccount = new Account()
             {
                 AccountId = 0,
-                AccountName = mo.FullName,
+                AccountName = null,
                 Address = null,
                 BirthDay = null,
                 Email = mo.Email,
                 Desc = null,
                 CreateBy = null,
-                GenderId = mo.GenderId == "1" ? true : false,
+                GenderId = null,
                 Mobile = null,
                 isUpdate = null,
                 UpdateBy = null,

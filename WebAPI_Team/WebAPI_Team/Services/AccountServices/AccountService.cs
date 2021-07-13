@@ -54,6 +54,21 @@ namespace WebAPI_Team.Services.AccountServices
                 return null;
             }
         }
+        // check Account already exist
+        public Boolean CheckExistAccount(string email)
+        {
+           
+               
+                var acc = _unitOfWork.AccountRepository.Get(x => x.Email.Equals(email)).Count();
+                if (acc > 0)
+                {
+                    return true;
+                }
+                else
+
+                    return false;
+            
+        }
         // Update Info of Specific Account
         public int UpdateAccount (Account model)
         {
@@ -84,19 +99,33 @@ namespace WebAPI_Team.Services.AccountServices
             }
 
         }
+             // check Email already exist
+             public Boolean CheckAccount(string email )
+        {
+            
+                Account ACC = new Account();
+                var acc = _unitOfWork.AccountRepository.Get(x => x.Email.Equals(email)).Count();
+                if (acc >= 1)
+                {
+                    return true;
+                }
+                else return false;  
+                  
+          
+        }
         #region Private Method
         private Account ConvertJsonToModel(JsonRegisterModel mo)
         {
             var newaccount = new Account()
             {
                 AccountId=0,
-                AccountName= mo.FullName,
+                AccountName= null,
                 Address=null,
                 BirthDay = null,
                 Email = mo.Email,
                 Desc = null,
                 CreateBy = null,
-                GenderId = mo.GenderId == "1" ? true : false,
+                GenderId = null,
                 Mobile = null,
                 isUpdate = null,
                 UpdateBy = null,
