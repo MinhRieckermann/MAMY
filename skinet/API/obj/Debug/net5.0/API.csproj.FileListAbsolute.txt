@@ -39,7 +39,6 @@ D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.
 D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
 D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
-D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\Newtonsoft.Json.dll
 D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
 D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
 D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
@@ -63,3 +62,7 @@ D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\Core.dll
 D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\Infrastructure.dll
 D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\Infrastructure.pdb
 D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\Core.pdb
+D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\AutoMapper.dll
+D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\GitHub_MAMY\MAMY\skinet\API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
