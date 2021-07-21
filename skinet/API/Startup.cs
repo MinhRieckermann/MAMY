@@ -18,6 +18,10 @@ using AutoMapper;
 using API.Helpers;
 using API.Middleware;
 using API.Errors;
+using StackExchange.Redis;
+using Infrastructure.Identity;
+using API.Extensions;
+using Infrastructure.Services;
 
 namespace API
 {
@@ -34,7 +38,9 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ITokenService,TokenService>();
             services.AddScoped<IProductRepository,ProductRepository>();
+            services.AddScoped<IBasketRepository,BasketRepository>();
             services.AddScoped(typeof(IGenericRepository<>),(typeof(GenericRepository<>)));
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
@@ -43,6 +49,18 @@ namespace API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });
             services.AddDbContext<StoreContext>(x=>x.UseSqlServer(_config.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<AppIdentityDbContext>(x =>
+            {
+                x.UseSqlServer(_config.GetConnectionString("IdentityConnection"));
+            });
+
+            services.AddSingleton<IConnectionMultiplexer>(c =>
+            {
+                var configuration=ConfigurationOptions.Parse(_config.GetConnectionString("Redis"),true);
+                return ConnectionMultiplexer.Connect(configuration);
+
+            });
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.InvalidModelStateResponseFactory=ActionContext =>
@@ -58,6 +76,7 @@ namespace API
                     return new BadRequestObjectResult(errorResponse);
                 };
             });
+            services.AddIdentityServices(_config);
             services.AddCors(opt =>
             {
                 opt.AddPolicy("CorsPolicy", policy =>
@@ -80,6 +99,8 @@ namespace API
             app.UseRouting();
             app.UseStaticFiles();
             app.UseCors("CorsPolicy");
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
