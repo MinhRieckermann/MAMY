@@ -39,6 +39,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ITokenService,TokenService>();
+            services.AddScoped<IOrderService,OrderService>();
             services.AddScoped<IProductRepository,ProductRepository>();
             services.AddScoped<IBasketRepository,BasketRepository>();
             services.AddScoped(typeof(IGenericRepository<>),(typeof(GenericRepository<>)));
