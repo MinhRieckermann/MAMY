@@ -12,6 +12,7 @@ using Core.Specifications;
 using API.Dtos;
 using AutoMapper;
 using API.Helpers;
+using API.Errors;
 
 namespace API.Controllers
 {
@@ -66,6 +67,8 @@ namespace API.Controllers
             productparams.PageSize,totalItems,data));
         }
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var spec = new ProductWithTypesAndBrandsSpecification(id);
@@ -79,7 +82,8 @@ namespace API.Controllers
             //     Price = product.Price,
             //     ProductBrand = product.ProductBrand.Name,
             //     ProductType = product.ProductType.Name,
-            // };
+            // }; 
+            if (product == null) return NotFound(new ApiResponse(404));
             return _mapper.Map<Product,ProductToReturnDto>(product);
         }
         [HttpGet("brands")]

@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+.xgn-breadcrumb-root{
+    padding: 8px 16px;
+    display: inline;
+    border-radius: 0;
+}
+label.xgn-breadcrumb-trail {
+    margin-bottom: 0;
+    color: orange;
+}
+
+.xgn-breadcrumb-separator{
+    padding: 0 0;
+}
