@@ -5,6 +5,7 @@ import { Basket, IBasket, IBasketItem, IBasketTotals } from '../shared/models/ba
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { IProduct } from '../shared/models/product';
+import { IDeliveryMethod } from '../shared/models/deliveryMethod';
 
 @Injectable({
   providedIn: 'root'
@@ -100,6 +101,17 @@ export class BasketService {
     this.basketTotalSource.next(null);
     localStorage.removeItem('basket_id');
   }
+
+  
+  setShippingPrice(deliveryMethod: IDeliveryMethod) {
+    this.shipping = deliveryMethod.price;
+    const basket = this.getCurrentBasketValue();
+    basket.deliveryMethodId = deliveryMethod.id;
+    basket.shippingPrice = deliveryMethod.price;
+    this.calculateTotals();
+    this.setBasket(basket);
+  }
+
   private calculateTotals() {
     const basket = this.getCurrentBasketValue();
     const shipping = this.shipping;
@@ -139,4 +151,5 @@ export class BasketService {
       type: item.productType
     };
   }
+  
 }
