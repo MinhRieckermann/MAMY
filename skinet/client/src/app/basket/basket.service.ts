@@ -28,7 +28,7 @@ export class BasketService {
         map((basket: IBasket) => {
           this.basketSource.next(basket);
           
-          // this.shipping = basket.shippingPrice;
+          this.shipping = basket.shippingPrice;
           this.calculateTotals();
         })
       );

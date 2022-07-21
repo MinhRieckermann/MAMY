@@ -30,20 +30,20 @@ namespace API.Controllers
             }
                 return Ok();
         }
-         [HttpGet("servererror")]
+        [HttpGet("servererror")]
         public ActionResult GetServerError()
         {
             var thing=_context.Products.Find(42);
             var thingToReturn=thing.ToString();
                 return Ok();
         }
-         [HttpGet("badrequest")]
+        [HttpGet("badrequest")]
         public ActionResult GetBadRequest()
         {
 
                 return BadRequest(new ApiResponse(400));
         }
-         [HttpGet("badrequest/{id}")]
+        [HttpGet("badrequest/{id}")]
         public ActionResult GetNotFoundRequest(int id)
         {
 
